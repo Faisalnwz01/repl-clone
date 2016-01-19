@@ -1,0 +1,336 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+@import "vars.scss";
+
+html, body {
+  height: 100%;
+    margin: 0;
+}
+
+body {
+  font-family: $console-font-family;
+  background-color: $header-background;
+}
+
+.header {
+  background-color: $header-background;
+  height: $header-height;
+  overflow: hidden;
+
+  &__logo {
+    float: left;
+    margin-top: 20px;
+    margin-left: 15px;
+
+    a {
+      width: 50px;
+      height: 65px;
+      background: #1E001E;
+      display: inline-block;
+      border-radius: 10px;
+
+      &:after, &:before {
+        width: 11px;
+        height: 11px;
+        margin-top: 15px;
+        display: inline-block;
+        position: absolute;
+        content: "";
+        border-radius: 50%;
+      }
+
+      &:after {
+        margin-left: 28px;
+        background: #4A99FF;
+      }
+
+      &:before {
+        margin-left: 12px;
+        background: #FFDB51;
+      }
+      
+    }
+  }
+
+  &__content {
+    float: left;
+    color: white;
+  }
+}
+
+.editor {
+  height: calc(100% - #{$header-height});
+  width: 100%;
+
+  &__code-screen {
+    float: left;
+    width: 60%;
+    height: calc(100%);
+
+    &__editor-wrapper {
+      height: 100%;
+    }
+
+    .ace_gutter {
+      padding: 7px 0;
+    }
+
+    .ace_content {
+      padding: 5px;
+    }
+
+    .ace_editor {
+      background: #241927;
+      font-family: $console-font-family;
+    }
+  }
+
+  &__console {
+    background-color: $console-background;
+    color: $console-text-color;
+    font-size: 17px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    height: 100%;
+    position: absolute;
+  }
+}
+
+.console {
+  height: 100%;
+
+  &__output {
+    font-family: $console-font-family;
+    height: calc(100% - #{$console-toolbar-height} - 30px);
+    overflow: auto;
+    padding-top: 10px;
+    border-left: 1px solid #231127;
+
+    &__line {
+      padding: 2px 10px;
+      overflow: hidden;
+    }
+  }
+
+  &__toolbar {
+    position: relative;
+    width: inherit;
+    background: $console-toolbar-background;
+    color: $console-toolbar-text-background;
+    height: $console-toolbar-height;
+    overflow: hidden;
+    overflow: hidden;
+    padding-top: 20px;
+
+    &__run-button {
+      margin-top: 12px;
+      margin-left: 0;
+      float: left;
+      background: $console-background;
+      color: #ffc857;
+      border: 0;
+      padding: 12px 14px;
+      border-radius: 5px;
+      font-size: 15px;
+      outline: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #4A99FF;
+      }
+
+      &:active {
+        color: #fff;
+      }
+
+    }
+
+    &__interpreter-info {
+      float: left;
+      color: gray;
+      font-size: 0.9em;
+      margin: 28px 0 0 10px;
+      color: #816988;
+    }
+
+    &__live-coding {
+      margin-top: 27px;
+      float: right;
+      padding-right: 20px;
+      font-size: 0.9em;
+
+      input {
+        margin-right: 6px;
+      }
+    }
+  }
+
+  &__error-line {
+    background: #FF4040;
+    color: #940808;
+    position: fixed;
+    border-top: 5px solid #D62C2C;
+    width: 60%;
+    left: 0;
+    bottom: 0;
+
+    &__description {
+      margin: 15px;
+      font-family: $console-font-family;
+    }
+  }
+}
+
+.file-list {
+  margin: 0 0 0 10px;
+  padding: 0;
+
+  &__item:first-child {
+    border-top-left-radius: 5px;
+  }
+
+  &__item {
+    list-style: none;
+    float: left;
+    margin-top: 35px;
+    padding: 10px;
+    background: $tab-background;
+    border-right: 1px solid black;
+    cursor: pointer;
+
+    a {
+      color: $tab-text-color;
+      text-decoration: none;
+    }
+
+    button {
+      margin-left: 2px;
+      background-color: $current-tab-background;
+      border: none;
+      color: gray;
+      font-size: 1.3em;
+      display: inline-block;
+      margin-top: -9px;
+      margin-right: -4px;
+      outline: none;
+
+      &:hover {
+        color: orange;
+      }
+    }
+
+    &--current {
+      background: $current-tab-background;
+
+      a {
+        color: $current-tab-text-color;
+      }
+    }
+
+    &--new {
+      border-top-right-radius: 5px;
+        padding: 10px 13px;
+
+        a {
+        font-size: 1.5em;
+          margin-top: -32px;
+          line-height: 0.7em;
+          color: #FFE7FF;
+          text-shadow: 1px 1px 1px black;
+        }
+    }
+  }
+
+  &__rename-form {
+
+    &__input {
+      background-color: transparent;
+        border: none;
+        padding: 3px;
+        font-family: $console-font-family;
+        outline: none;
+        color: $current-tab-text-color;
+        font-size: 15px;
+        width: 80px;
+        margin-top: -3px;
+    }
+  }
+}
+
+.console__chunk {
+  float: left;
+  margin-right: 10px;
+  color: #DCDCDC;
+
+  &--dict {
+    background-color: #301C35;
+    border: 1px solid #3C2144;
+    border-radius: 5px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 1px;
+
+    &__item {
+      &--empty {
+        padding: 10px 5px;
+      }
+    }
+
+    &__key {
+      padding: 3px;
+      color: #A88BB1;
+    }
+
+    &__val {
+      padding: 3px;
+
+      .console__chunk {
+        margin: 0;
+      }
+    }
+  }
+
+  &--list {
+    background: #0E3D4A;
+    border: 1px solid #0F5165;
+    border-radius: 5px;
+    float: left;
+    margin: 0 5px 0 0;
+    padding: 2px;
+    overflow: auto;
+
+    &__item {
+      padding: 2px 3px;
+      list-style: none;
+      margin: 0;
+      float: left;
+
+      &--empty {
+        padding: 2px;
+      }
+    }
+
+    &__separator {
+      color: #146D86;
+    }
+  }
+
+  &--set {
+    background: #5A370C;
+    border: 1px solid #695227;
+  }
+
+  &--builtin { 
+    color: #80A1BD;
+  }
+
+  &--integer,
+  &--float {
+    color: #DE935F;
+  }
+
+  &--instance {
+    color: #B8EA6C;
+  }
+}
